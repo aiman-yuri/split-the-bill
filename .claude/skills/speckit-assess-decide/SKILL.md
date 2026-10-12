@@ -41,7 +41,7 @@ $ARGUMENTS
    - **Risk posture** — are the major risks understood and acceptably mitigated? Rate with the same positive polarity as the other criteria: `strong` = key risks identified and credibly mitigated; `weak` = serious, unmitigated risk. (from all artifacts)
 2. **Reach a verdict**:
    - **go** — the idea is worth specifying. Requires problem validity `adequate`+, **evidence strength `adequate`+ (never `weak` or `unknown`)**, and a recommended concept option. If evidence is `weak`/`unknown`, the verdict is `needs-clarification`, not `go`.
-   - **needs-clarification** — promising but blocked on specific unknowns. List exactly what must be answered and which stage to revisit.
+   - **needs-clarification** — promising but blocked on specific unknowns. List exactly what must be answered and which stage to revisit. If a human is driving and some blockers are the owner's decisions (scope, locale, data handling, goals) rather than missing evidence, offer to resolve them now with the `grilling` skill (invoke it with the Skill tool). Record the answers in `research.md` under a Clarifications section, then re-score; evidence gaps still need research, not an interview.
    - **kill** — not worth building now. State the decisive reason plainly (weak problem, better alternative exists, cost > value, out of scope, superseded).
 3. **Record the rationale** so the decision is auditable months later. Any `unknown` score must be acknowledged, not glossed.
 4. **Define the handoff (go only)**: summarize what `/speckit-specify` should receive — the problem statement, the recommended option, in/out of scope, success metrics, and open questions carried forward.

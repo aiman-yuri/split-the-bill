@@ -73,11 +73,19 @@ Given that feature description, do this:
      - "Create a dashboard for analytics" → "analytics-dashboard"
      - "Fix payment processing timeout bug" → "fix-payment-timeout"
 
-2. **Branch creation** (optional, via hook):
+2. **Branch name** (project convention, always ask):
 
-   If a `before_specify` hook ran successfully in the Pre-Execution Checks above, it will have created/switched to a git branch and output JSON containing `BRANCH_NAME` and `FEATURE_NUM`. Note these values for reference, but the branch name does **not** dictate the spec directory name.
+   Branch names follow `<type>/<NNN>-<short-name>`, where `<NNN>-<short-name>` is the spec directory name from step 3 (e.g. `feat/001-itemized-bill-split`), so each branch maps to exactly one spec. You generate the name; the user chooses `<type>`:
+   - `feat` — new user-facing capability or behavior
+   - `fix` — corrects a bug or wrong behavior
+   - `chore` — tooling, build, dependencies, docs or other non-behavioral work
 
-   If the user explicitly provided `GIT_BRANCH_NAME`, pass it through to the hook so the branch script uses the exact value as the branch name (bypassing all prefix/suffix generation).
+   Every invocation, before creating the spec directory:
+   1. Pick the type that best fits the spec.
+   2. Compute the spec directory name now (step 3 resolution rules), so the number is known before asking.
+   3. Ask the user for the prefix only, using AskUserQuestion with exactly the options `feat`, `fix` and `chore`. Put your pick first, marked "(Recommended)", and show the full resulting branch name in each option's description (e.g. `feat/001-itemized-bill-split`). Never ask the user for the name part. Never skip this question.
+   4. Set `BRANCH_NAME` to `<chosen type>/<spec directory name>`.
+   5. Create and switch to the branch with `git switch -c <BRANCH_NAME>` (the user has authorized this one git write for this command). Uncommitted changes carry over. If the branch already exists or the command fails, stop and report the git error; do not pick another name. Run no other git write command (no `commit`, `push`, `reset`, `stash`).
 
 3. **Create the spec feature directory**:
 
@@ -138,7 +146,7 @@ Given that feature description, do this:
        Create measurable, technology-agnostic outcomes
        Include both quantitative metrics (time, performance, volume) and qualitative measures (user satisfaction, task completion)
        Each criterion must be verifiable without implementation details
-    7. Identify Key Entities (if data involved)
+    7. Identify Key Entities (if data involved). If `GLOSSARY.md` exists, use its terms for entities and actors and call out any conflict. Then invoke the `domain-modeling` skill with the Skill tool and add each newly settled domain term (no implementation detail) to `GLOSSARY.md`, creating it if absent
     8. Return: SUCCESS (spec ready for planning)
 
 7. Write the specification to SPEC_FILE using the template structure, replacing placeholders with concrete details derived from the feature description (arguments) while preserving section order and headings.
@@ -275,10 +283,11 @@ Check if `.specify/extensions.yml` exists in the project root.
 Report completion to the user with:
 - `SPECIFY_FEATURE_DIRECTORY` — the feature directory path
 - `SPEC_FILE` — the spec file path
+- `BRANCH_NAME` created and checked out in step 2
 - Checklist results summary
 - Readiness for the next phase (`/speckit-clarify` or `/speckit-plan`)
 
-**NOTE:** Branch creation is handled by the `before_specify` hook (git extension). Spec directory and file creation are always handled by this core command.
+**NOTE:** This command asks the user for the branch prefix, then creates and switches to the branch (step 2). Spec directory and file creation are always handled by this core command.
 
 ## Quick Guidelines
 

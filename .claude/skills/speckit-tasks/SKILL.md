@@ -208,6 +208,7 @@ Every task MUST strictly follow this format:
 - **Phase 2**: Foundational (blocking prerequisites - MUST complete before user stories)
 - **Phase 3+**: User Stories in priority order (P1, P2, P3...)
   - Within each story: Tests (if requested) → Models → Services → Endpoints → Integration
+  - **Test-first work follows the `tdd` skill** (invoke it with the Skill tool before generating tasks when tests are requested or the constitution requires test-first). Slice vertically: each test task is immediately followed by the implementation task that makes it pass, one behaviour per pair. Never group all of a story's tests ahead of all its implementation. Each test task names the seam it tests at, taken from plan.md, and its expected values come from the spec's worked examples, not recomputed the way the code would.
   - Each phase should be a complete, independently testable increment
 - **Final Phase**: Polish & Cross-Cutting Concerns
 

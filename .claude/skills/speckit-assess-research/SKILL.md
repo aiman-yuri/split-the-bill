@@ -57,6 +57,8 @@ Investigate the idea across these lenses. Skip any that genuinely do not apply, 
 4. **Data & constraints** — Relevant metrics, volumes, compliance/legal factors, platform limits.
 5. **Evidence quality** — For each finding, tag confidence `high | medium | low` and whether it is `cited` (source given) or `assumption` (no source).
 
+For lenses that need web or documentation reading, invoke the `research` skill with the Skill tool and follow its primary-source discipline: trace each claim to the source that owns it (official docs, first-party data, the product itself) rather than a secondary write-up. Its findings go into this assessment's `research.md` below, not a separate file.
+
 Then write `ASSESS_DIR/research.md`:
 
 ```markdown

@@ -155,7 +155,7 @@ You **MUST** consider the user input before proceeding (if not empty).
 6. Execute implementation following the task plan:
    - **Phase-by-phase execution**: Complete each phase before moving to the next
    - **Respect dependencies**: Run sequential tasks in order, parallel tasks [P] can run together
-   - **Follow TDD approach**: Execute test tasks before their corresponding implementation tasks
+   - **Follow TDD approach**: Execute test tasks before their corresponding implementation tasks. Invoke the `tdd` skill with the Skill tool before the first test task and follow its loop: watch each test fail for the right reason before writing the code that passes it, test only at the seams named in plan.md, and keep refactoring out of the red → green loop
    - **File-based coordination**: Tasks affecting the same files must run sequentially
    - **Validation checkpoints**: Verify each phase completion before proceeding
 
@@ -171,6 +171,7 @@ You **MUST** consider the user input before proceeding (if not empty).
    - Halt execution if any non-parallel task fails
    - For parallel tasks [P], continue with successful tasks, report failed ones
    - Provide clear error messages with context for debugging
+   - If a failure does not yield to a straightforward fix (unexpected test result, flaky behaviour, a bug whose cause is unclear), invoke the `diagnosing-bugs` skill and build a red-capable feedback loop before changing code
    - Suggest next steps if implementation cannot proceed
    - **IMPORTANT** For completed tasks, make sure to mark the task off as [X] in the tasks file.
 
@@ -179,6 +180,7 @@ You **MUST** consider the user input before proceeding (if not empty).
    - Check that implemented features match the original specification
    - Validate that tests pass and coverage meets requirements
    - Confirm the implementation follows the technical plan
+   - Invoke the `code-review` skill with the merge-base of the default branch as the fixed point and this feature's spec.md as the spec source. Report its Standards and Spec findings; fix confirmed defects (refactors included) as separate, test-backed changes, and list the rest for the user
 
 Note: This command assumes a complete task breakdown exists in tasks.md. If tasks are incomplete or missing, suggest running `/speckit-tasks` first to regenerate the task list.
 

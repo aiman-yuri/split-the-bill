@@ -179,6 +179,7 @@ Execution steps:
        - User signals completion ("done", "good", "no more"), OR
        - You reach 5 asked questions.
     - Never reveal future queued questions in advance.
+    - Apply the `grilling` skill's discipline (invoke it with the Skill tool once, before the first question), within this command's one-question-at-a-time format and 5-question cap: order the queue as a design tree, asking a question only once the decisions it depends on are settled; find facts yourself (repo, constitution, assessment artifacts under `.specify/assessments/`) and never ask the user for something you can look up; put only decisions to the user.
     - If no valid questions exist at start, immediately report no critical ambiguities.
 
 6. Integration after EACH accepted answer (incremental update approach):
@@ -193,7 +194,7 @@ Execution steps:
        - Data shape / entities → Update Data Model (add fields, types, relationships) preserving ordering; note added constraints succinctly.
        - Non-functional constraint → Add/modify measurable criteria in Success Criteria > Measurable Outcomes (convert vague adjective to metric or explicit target).
        - Edge case / negative flow → Add a new bullet under Edge Cases / Error Handling (or create such subsection if template provides placeholder for it).
-       - Terminology conflict → Normalize term across spec; retain original only if necessary by adding `(formerly referred to as "X")` once.
+       - Terminology conflict → Normalize term across spec; retain original only if necessary by adding `(formerly referred to as "X")` once. Also record the canonical term in `GLOSSARY.md` per the `domain-modeling` skill (invoke it with the Skill tool on the first terminology answer; create the file if absent).
     - If the clarification invalidates an earlier ambiguous statement, replace that statement instead of duplicating; leave no obsolete contradictory text.
     - Save the spec file AFTER each integration to minimize risk of context loss (atomic overwrite).
     - Preserve formatting: do not reorder unrelated sections; keep heading hierarchy intact.

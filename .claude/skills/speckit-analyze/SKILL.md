@@ -151,7 +151,7 @@ Focus on high-signal findings. Limit to 50 findings total; aggregate remainder i
 
 #### F. Inconsistency
 
-- Terminology drift (same concept named differently across files)
+- Terminology drift (same concept named differently across files, or differently from `GLOSSARY.md` if it exists; the glossary is the canonical source)
 - Data entities referenced in plan but absent in spec (or vice versa)
 - Task ordering contradictions (e.g., integration tasks before foundational setup tasks without dependency note)
 - Conflicting requirements (e.g., one requires Next.js while other specifies Vue)

@@ -69,6 +69,12 @@ You **MUST** consider the user input before proceeding (if not empty).
    - Phase 1: Generate data-model.md, contracts/, quickstart.md
    - Re-evaluate Constitution Check post-design
 
+   **Companion skills** (invoke with the Skill tool at the step named; skip when the step has nothing for them):
+   - `research` — Phase 0: for unknowns that need external facts (library versions, platform APIs, best practices), use its primary-source discipline and cite each claim. Findings go into this feature's `research.md`, not a separate file.
+   - `codebase-design` — Phase 1: when deciding the project structure and module boundaries in plan.md, use its vocabulary (module, interface, depth, seam) and favour deep modules with small interfaces. Name the seams that tests will cross; `/speckit-tasks` and `tdd` rely on them.
+   - `domain-modeling` — Phase 1: when writing data-model.md, keep entity names consistent with `GLOSSARY.md` (create it if absent) and add newly resolved terms. Offer an ADR in `docs/adr/` only for decisions that are hard to reverse, surprising and the result of a real trade-off.
+   - `prototype` — only when a design question cannot be settled on paper (e.g. whether a calculation or state model behaves right). Keep it throwaway, outside the main code, and record the verdict in research.md.
+
 ## Mandatory Post-Execution Hooks
 
 **You MUST complete this section before reporting completion to the user.**
