@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 
-import { type Bill, type Edit, emptyBill, split } from '../bill';
-import type { BillStore } from '../storage/billStore';
+import { type Bill, type Edit, emptyBill, split } from '@/bill';
+import type { BillStore } from '@/storage/billStore';
 import { rejectionMessages } from './messages';
 
 export type Commit = (edit: Edit) => string | null;

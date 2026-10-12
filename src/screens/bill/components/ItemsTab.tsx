@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
 
-import { type Bill, type Item, formatRm, lineAmountSen } from '../bill';
+import { type Bill, type Item, formatRm, lineAmountSen } from '@/bill';
 import { ChargesCard } from './ChargesCard';
 import { ItemEditor } from './ItemEditor';
-import { colors, common } from './theme';
-import type { Commit } from './useBill';
+import { colors, common } from '@/theme';
+import type { Commit } from '../useBill';
 
 export function ItemsTab({ bill, commit }: { bill: Bill; commit: Commit }) {
   // 'new' opens the editor empty; an item opens it on that item.

@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { Alert, FlatList, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 
-import { type Bill, type Person, type Split, addPerson, formatRm, removePerson, renamePerson } from '../bill';
-import { colors, common } from './theme';
-import type { Commit } from './useBill';
+import { type Bill, type Person, type Split, addPerson, formatRm, removePerson, renamePerson } from '@/bill';
+import { colors, common } from '@/theme';
+import type { Commit } from '../useBill';
 
 export function PeopleTab({ bill, split, commit }: { bill: Bill; split: Split; commit: Commit }) {
   const [name, setName] = useState('');

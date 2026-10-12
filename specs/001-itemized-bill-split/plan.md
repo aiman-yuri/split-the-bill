@@ -16,7 +16,7 @@ Build the first version of the Android app in TypeScript with React Native and E
 
 **Storage**: One JSON document under key `bill` in `expo-sqlite/kv-store`, written with `setItemSync` on every committed edit (R4, contracts/bill-file.md)
 
-**Testing**: Jest 29 with `jest-expo` 57: a `node` project for `src/bill` and `src/storage`, an `android` project for `src/ui` component journeys with `@testing-library/react-native` 14 (R6). Manual device checks in quickstart.md.
+**Testing**: Jest 29 with `jest-expo` 57: a `node` project for `src/bill` and `src/storage`, an `android` project for `src/screens` component journeys with `@testing-library/react-native` 14 (R6). Manual device checks in quickstart.md.
 
 **Target Platform**: Android 7.0+ (minSdk 24), targetSdk and compileSdk 36. iOS on hold.
 
@@ -64,11 +64,14 @@ specs/001-itemized-bill-split/
 ```text
 package.json             # scripts: start, android, test, lint, typecheck
 app.json                 # name, slug, android.package com.aimanyuri.splitthebill
-tsconfig.json            # extends expo/tsconfig.base, strict
+tsconfig.json            # extends expo/tsconfig.base, strict, path alias @/* → src/*
 eslint.config.js         # eslint-config-expo + no-restricted-imports for src/bill/**
-jest.config.js           # projects: node (src/bill, src/storage), android (src/ui)
+jest.config.js           # projects: node (src/bill, src/storage), android (src/screens); maps @/*
+babel.config.js          # babel-preset-expo (the jest-expo android preset needs it, research.md R6)
 index.ts                 # registerRootComponent(App)
 src/
+├── App.tsx              # SafeAreaProvider, createBillStore(Storage), <BillScreen store>
+├── theme.ts             # colours and shared styles
 ├── bill/                # pure TypeScript, no react / react-native / expo imports
 │   ├── index.ts         # the module's public interface (contracts/bill-module.md)
 │   ├── bill.ts          # Bill, Item, Person, Edit, Rejection, edit functions
@@ -80,25 +83,26 @@ src/
 ├── storage/
 │   ├── billStore.ts     # createBillStore(kv): load, save, clear
 │   └── billStore.test.ts
-└── ui/
-    ├── App.tsx          # SafeAreaProvider, createBillStore(Storage), <BillScreen store>
-    ├── useBill.ts       # bill state, commit(edit) saves then sets, split via useMemo
-    ├── BillScreen.tsx   # takes the store; header with New bill, active tab, TabBar
-    ├── TabBar.tsx
-    ├── ItemsTab.tsx     # item list, ChargesCard
-    ├── ChargesCard.tsx
-    ├── ItemEditor.tsx   # core Modal
-    ├── PeopleTab.tsx
-    ├── SplitTab.tsx
-    ├── messages.ts      # Rejection → message text
-    └── BillJourney.test.tsx
+└── screens/
+    └── bill/            # the one screen; everything only it uses lives here
+        ├── BillScreen.tsx       # takes the store; header with New bill, active tab, TabBar
+        ├── BillScreen.test.tsx  # journey tests for stories 1–3
+        ├── useBill.ts           # bill state, commit(edit) saves then sets, split via useMemo
+        ├── messages.ts          # Rejection → message text
+        └── components/
+            ├── TabBar.tsx
+            ├── ItemsTab.tsx     # item list, ChargesCard
+            ├── ChargesCard.tsx
+            ├── ItemEditor.tsx   # core Modal
+            ├── PeopleTab.tsx
+            └── SplitTab.tsx
 ```
 
-**Structure Decision**: One Expo project (constitution), separated into three folders. The template's root `App.tsx` moves to `src/ui/App.tsx`.
+**Structure Decision**: One Expo project (constitution). App code lives under `src/`, apart from the root config files, following Expo's folder-structure guidance (expo.dev/blog/expo-app-folder-structure-best-practices): a screen gets its own folder under `screens/` with its private parts in a nested `components/`, and tests sit next to the code they cover. Cross-folder imports use the `@/` alias; imports within one folder stay relative. The template's root `App.tsx` moves to `src/App.tsx`.
 
 - **`src/bill`** is the deep module and the main seam. Its interface is small: the `Bill` value, seven edit functions, `split`, `parseRm`, `formatRm`, `encodeBill` and `decodeBill` (contracts/bill-module.md). Behind it sit validation, the division rule, `bigint` arithmetic, charge proportioning, status rules, the sum invariant and the saved format. All money tests cross this seam. `allocate` is an internal seam tested directly only for its own edge cases.
 - **`src/storage`** has one function, `createBillStore(kv)`, with `load`, `save` and `clear`. It is the persistence seam: it owns the key names and the unreadable-value recovery, and knows nothing of the JSON shape. Its two adapters are kv-store in the app and an in-memory object in tests.
-- **`src/ui`** holds the screens and `useBill`. `useBill` turns user intents into `bill` edits, saves through the store before showing the result, and keeps the last rejection for the form to show. It has no money logic of its own; amounts reach it only through `parseRm`, `formatRm` and `split`. The journey test renders `BillScreen` with an in-memory store and crosses the same seam a user does: `testID`s from contracts/ui.md.
+- **`src/screens`** holds the screens and `useBill`. `useBill` turns user intents into `bill` edits, saves through the store before showing the result, and keeps the last rejection for the form to show. It has no money logic of its own; amounts reach it only through `parseRm`, `formatRm` and `split`. The journey test renders `BillScreen` with an in-memory store and crosses the same seam a user does: `testID`s from contracts/ui.md.
 
 ## Complexity Tracking
 

@@ -2,12 +2,12 @@ import { useEffect, useState } from 'react';
 import { Alert, Pressable, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import type { BillStore } from '../storage/billStore';
-import { ItemsTab } from './ItemsTab';
-import { PeopleTab } from './PeopleTab';
-import { SplitTab } from './SplitTab';
-import { type Tab, TabBar } from './TabBar';
-import { colors } from './theme';
+import type { BillStore } from '@/storage/billStore';
+import { ItemsTab } from './components/ItemsTab';
+import { PeopleTab } from './components/PeopleTab';
+import { SplitTab } from './components/SplitTab';
+import { type Tab, TabBar } from './components/TabBar';
+import { colors } from '@/theme';
 import { useBill } from './useBill';
 
 export function BillScreen({ store }: { store: BillStore }) {

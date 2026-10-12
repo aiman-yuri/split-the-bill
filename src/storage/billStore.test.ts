@@ -1,4 +1,4 @@
-import { type Bill, emptyBill } from '../bill';
+import { type Bill, emptyBill } from '@/bill';
 import { createBillStore } from './billStore';
 
 function memoryKv(initial: Record<string, string> = {}) {

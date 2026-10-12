@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 
-import { type Bill, type Share, type Split, formatRm, lineAmountSen } from '../bill';
-import { colors } from './theme';
+import { type Bill, type Share, type Split, formatRm, lineAmountSen } from '@/bill';
+import { colors } from '@/theme';
 
 function bannerText(split: Split): string | null {
   switch (split.status) {

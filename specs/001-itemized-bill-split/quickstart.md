@@ -18,7 +18,7 @@ npm ci
 npx jest
 ```
 
-Expected: all tests pass in both Jest projects (`node` for `src/bill` and `src/storage`, `android` for `src/ui`). They cover every acceptance scenario and edge case in spec.md and the invariants in data-model.md. In particular:
+Expected: all tests pass in both Jest projects (`node` for `src/bill` and `src/storage`, `android` for `src/screens`). They cover every acceptance scenario and edge case in spec.md and the invariants in data-model.md. In particular:
 
 | Check | Expected |
 |---|---|

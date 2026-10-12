@@ -2,10 +2,10 @@ import { useState } from 'react';
 import { KeyboardAvoidingView, Modal, Pressable, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { type Bill, type Item, type Rejection, addItem, formatRm, parseRm, removeItem, updateItem } from '../bill';
-import { notAnAmount, rejectionMessages } from './messages';
-import { colors, common } from './theme';
-import type { Commit } from './useBill';
+import { type Bill, type Item, type Rejection, addItem, formatRm, parseRm, removeItem, updateItem } from '@/bill';
+import { notAnAmount, rejectionMessages } from '../messages';
+import { colors, common } from '@/theme';
+import type { Commit } from '../useBill';
 
 type Field = 'name' | 'quantity' | 'price' | 'form';
 

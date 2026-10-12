@@ -1,4 +1,4 @@
-import type { Rejection } from '../bill';
+import type { Rejection } from '@/bill';
 
 export const rejectionMessages: Record<Rejection, string> = {
   BlankName: 'Enter a name.',

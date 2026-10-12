@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 
-import { type Bill, formatRm, parseRm, setCharges } from '../bill';
-import { notAnAmount } from './messages';
-import { colors, common } from './theme';
-import type { Commit } from './useBill';
+import { type Bill, formatRm, parseRm, setCharges } from '@/bill';
+import { notAnAmount } from '../messages';
+import { colors, common } from '@/theme';
+import type { Commit } from '../useBill';
 
 type Charge = 'serviceChargeSen' | 'sstSen' | 'roundingSen';
 

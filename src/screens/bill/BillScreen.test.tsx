@@ -2,8 +2,8 @@ import { act, fireEvent, render, screen } from '@testing-library/react-native';
 import { Alert, type AlertButton } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
-import { type Bill, decodeBill, emptyBill, encodeBill } from '../bill';
-import { createBillStore } from '../storage/billStore';
+import { type Bill, decodeBill, emptyBill, encodeBill } from '@/bill';
+import { createBillStore } from '@/storage/billStore';
 import { BillScreen } from './BillScreen';
 
 const metrics = {

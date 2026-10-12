@@ -1,6 +1,6 @@
 // Keeps the bill in progress on the device (contracts/bill-file.md). Owns the key names and
 // the recovery of an unreadable value; the bill module owns the format.
-import { type Bill, decodeBill, emptyBill, encodeBill } from '../bill';
+import { type Bill, decodeBill, emptyBill, encodeBill } from '@/bill';
 
 export type KeyValue = {
   getItemSync(key: string): string | null;
