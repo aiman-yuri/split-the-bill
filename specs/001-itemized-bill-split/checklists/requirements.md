@@ -33,4 +33,5 @@
 
 - Passed on the first validation pass.
 - Open questions carried forward from the assessment were resolved with defaults recorded in Assumptions: no saved history (only the in-progress bill persists), 2–20 people, names only, editable at any time with no settled state. Minimum Android version is deferred to `/speckit-plan`. Use `/speckit-clarify` to revisit any of these.
+- Revalidated 2026-10-12 after the platform update (Clarifications, Assumptions): all items pass. The spec names the target platform (Android phones; iOS on hold) as scope only; the stack (TypeScript, React Native + Expo) lives in the constitution, not the spec. The minimum Android version is deferred to `/speckit-plan`.
 - Items marked incomplete require spec updates before `/speckit-clarify` or `/speckit-plan`
